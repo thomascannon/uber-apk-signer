@@ -7,15 +7,17 @@
     <parent>
         <groupId>at.favre.lib</groupId>
         <artifactId>common-parent</artifactId>
-        <version>12</version>
+        <version>15</version>
     </parent>
 
     <groupId>at.favre.tools</groupId>
     <artifactId>uber-apk-signer</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.1</version>
 
     <properties>
         <commonConfig.jarSign.skip>false</commonConfig.jarSign.skip>
+        <!-- TODO until we fix https://github.com/patrickfav/uber-apk-signer/issues/24 -->
+        <commonConfig.jacoco.check.disable>true</commonConfig.jacoco.check.disable>
     </properties>
 
     <repositories>
@@ -34,12 +36,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <!-- this version is required, otherwise surefire stream error -->
+                <version>3.0.0-M4</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <!-- this version is required, otherwise jacoco fails (tested with 0.8.5) -->
-                <version>0.8.2</version>
                 <configuration>
                     <excludes>
                         <!-- excludes system scoped dependencies -->
@@ -195,7 +197,7 @@
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-            <version>1.9.6</version>
+            <version>1.10.11</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -214,6 +216,6 @@
 
     <ciManagement>
         <system>Travis</system>
-        <url>https://travis-ci.org/patrickfav/uber-apk-signer</url>
+        <url>https://travis-ci.com/patrickfav/uber-apk-signer</url>
     </ciManagement>
 </project>
